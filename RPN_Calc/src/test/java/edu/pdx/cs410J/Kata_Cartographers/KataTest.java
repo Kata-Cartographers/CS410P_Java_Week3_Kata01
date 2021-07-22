@@ -14,13 +14,14 @@ public class KataTest
 
 
   @Test
-  void divided20by5() {
+  void sampleOne() {
       Kata myKata = new Kata();
       String[] args = { "20", "5", "/"};
       assertThat(Kata.calc(args), equalTo(4));
   }
 
-
+  //@Test
+  //  void
 
 }
 
