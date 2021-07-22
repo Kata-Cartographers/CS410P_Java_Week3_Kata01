@@ -27,10 +27,10 @@ public class Kata {
       myStack.push(str);
     }
 
-    //STAGE OPERATOR CHECK
     while(!myStack.isEmpty())
     {
       tempStr = myStack.peek();
+      //OPERATOR CHECK
       if(tempStr.equalsIgnoreCase("/")
         || tempStr.equalsIgnoreCase("*")
         || tempStr.equalsIgnoreCase("-")
@@ -42,9 +42,11 @@ public class Kata {
         //myOperatorStack.push(tempStr);
         myOperatorStack.push(myStack.pop()); //adding the operator
       }
+      //OPERAND CHECK
       else {
         try {
-          tempInt.parseInt((myStack.pop())); //parsing the int, throwing except if needed
+          tempInt = Integer.parseInt(tempStr); //parsing the int, throwing except if needed
+          myStack.pop(); //getting rid of the copy on the stack
           myOperandStack.push(tempInt); //adding the operand
         }
         catch (NumberFormatException e) {
@@ -54,7 +56,18 @@ public class Kata {
         }
       }
     }
-    //STAGE OPERAND CHECK
+    while(!myOperatorStack.isEmpty())
+    {
+      tempStr = myOperatorStack.peek();
+      //DIVISION
+      if(tempStr.equalsIgnoreCase("/"))
+      {
+        if(myOperandStack.size() > 1)
+        {
+          return myOperandStack.pop() / myOperandStack.pop();
+        }
+      }
+    }
 
     return 1;
   }
